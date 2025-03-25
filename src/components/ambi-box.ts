@@ -17,14 +17,6 @@ export class AmbiBox extends HTMLElement {
 
 		this.events = new EventList();
 
-		this.events.add( 'update', {
-
-            detail: { message: 'Обновили данные' },
-            bubbles: true,
-            composed: true
-
-		} );
-
 	}
 
 	update() {
@@ -107,23 +99,35 @@ export class AmbiBox extends HTMLElement {
 
 	}
 
-	// addEvents() {
+	addEvents() {
 
-	// 	this.addEventListener( 'click',  )
+		this.events.add( 'update', {
 
-	// }
+            detail: { message: 'Обновили данные' },
+            bubbles: true,
+            composed: true
 
-	// removeEvents() {
+		} );
 
-	// }
+	}
+
+	removeEvents() {
+
+		this.events.clear();
+
+	}
 
 	connectedCallback() {
 
 		this.render();
 
+		this.addEvents();
+
 	}
 
 	disconnectedCallback() {
+
+		this.removeEvents();
 
 	}
 
