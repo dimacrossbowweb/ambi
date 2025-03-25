@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + TS</title>
+
+	<style>
+
+		html,body {
+
+			margin: 0;
+			padding: 0;
+
+			background-color: #333333;
+
+		}
+
+		.card {
+
+			border-radius: 15px;
+			overflow: hidden;
+
+			box-shadow: 2px 2px 8px #111;
+
+		}
+
+		#app {
+
+			width: 100%;
+			height: 100vh;
+
+			display: flex;
+			justify-content: center;
+			align-items: center;
+
+			transition: backgroundColor .3s ease-in-out;
+
+		}
+
+	</style>
+	
+</head>
+  <body>
+    <div id="app">
+      
+	  <ambi-box onupdate="onupdate" id="ambi" target="video">
+
+		<div class="card">
+
+			<img src="/test.jpg" id="video" width="500"/>
+
+		</div>
+
+		<!-- <video 
+
+			id="video"
+			class="video"
+			src="/video.mp4"
+			height="400"
+			controls
+
+		></video> -->
+
+	  </ambi-box>
+
+    </div>
+    <script type="module">
+		import { AmbiBox } from './src/components/ambi-box.ts';
+
+		function onupdate ( data ) {
+
+			console.log( 'Давай покремче музло' );
+			console.log( data );
+
+		}
+
+		// document.getElementById( 'ambi' ).addEventListener( 'update', ( data ) => {
+
+		// 	console.log( 'Доброе утро, последний герой' );
+		// 	console.log( data );
+
+		// } );
+
+	</script>
+  </body>
+</html>
