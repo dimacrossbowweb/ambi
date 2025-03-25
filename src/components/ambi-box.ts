@@ -8,7 +8,7 @@ import { Color } from '../entities/color.ts';
 export class AmbiBox extends HTMLElement {
 
 	private rendered: boolean = false;
-	private ambilighter: Ambilighter<HTMLElement> | null = null;
+	private ambilighter: ( Ambilighter<HTMLElement> | null ) = null;
 	private events!: EventList;
 
 	constructor() {
@@ -31,7 +31,7 @@ export class AmbiBox extends HTMLElement {
 
 		const target: string = Formatted.formatStringAttribute( this.getAttribute( 'target' ), '' );
 
-		const targetElement: HTMLElement | null = document.getElementById( target );
+		const targetElement: ( HTMLElement | null ) = document.getElementById( target );
 
 		if ( targetElement ) {
 
@@ -57,7 +57,7 @@ export class AmbiBox extends HTMLElement {
 
 		} else {
 
-			const el: HTMLElement | null = ( this.children[ 0 ] instanceof HTMLElement ? this.children[ 0 ] : null );
+			const el: ( HTMLElement | null ) = ( this.children[ 0 ] instanceof HTMLElement ? this.children[ 0 ] : null );
 
 			console.log( 'el' );
 			console.log( el );

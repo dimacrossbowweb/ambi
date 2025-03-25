@@ -35,7 +35,7 @@ export class AmbilighterImage extends Ambilighter< HTMLImageElement > implements
 
 		return new Proxy( this, {
 
-			set( target: AmbilighterImage, prop: string | symbol, handler: (..._args: any) => void ): boolean {
+			set( target: AmbilighterImage, prop: ( string | symbol ), handler: (..._args: any) => void ): boolean {
 
 				if ( prop === 'onUpdate' ) {
 
