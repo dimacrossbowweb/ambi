@@ -35,9 +35,6 @@ export class AmbiBox extends HTMLElement {
 
 		if ( targetElement ) {
 
-			console.log( 'targetElement' );
-			console.log( targetElement );
-
 			this.ambilighter = Ambilight.produce( targetElement, {} );
 
 			if ( this.ambilighter?.onUpdate ) {
@@ -58,9 +55,6 @@ export class AmbiBox extends HTMLElement {
 		} else {
 
 			const el: ( HTMLElement | null ) = ( this.children[ 0 ] instanceof HTMLElement ? this.children[ 0 ] : null );
-
-			console.log( 'el' );
-			console.log( el );
 
 			this.ambilighter = Ambilight.produce( el, {} );
 				
