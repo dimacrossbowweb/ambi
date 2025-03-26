@@ -1,13 +1,13 @@
 import { IColor } from './color.interfaces';
 
-interface IBoxLightsBorder {
+export interface IBoxLightsBorder {
 
     color: IColor;
     radius: number;
 
 };
 
-interface IBoxLightsFrame {
+export interface IBoxLightsFrame {
 
 	top?: IBoxLightsBorder;
 	bottom?: IBoxLightsBorder;

@@ -30,28 +30,28 @@ export class AmbilighterVideo extends Ambilighter< HTMLVideoElement > implements
 						top: {
 							
 							color: averageColor( getImageData( this.canvas, Vector.top ) ),
-							radius: 1,
+							radius: this.radius,
 
 						},
 
 						bottom: {
 							
 							color: averageColor( getImageData( this.canvas, Vector.bottom ) ),
-							radius: 1,
+							radius: this.radius,
 
 						},
 
 						left: {
 							
 							color: averageColor( getImageData( this.canvas, Vector.left ) ),
-							radius: 1,
+							radius: this.radius,
 
 						},
 
 						right: {
 							
 							color: averageColor( getImageData( this.canvas, Vector.right ) ),
-							radius: 1,
+							radius: this.radius,
 
 						},
 
@@ -106,6 +106,15 @@ export class AmbilighterVideo extends Ambilighter< HTMLVideoElement > implements
         }
 
     }
+
+	/**
+	 * getters / setters
+	 */
+	get radius (): number {
+
+		return this?.options?.radius || 0;
+
+	}
 
     /**
      * Hooks

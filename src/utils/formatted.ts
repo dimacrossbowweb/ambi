@@ -56,7 +56,7 @@ export class Formatted {
 
 	}
 
-	static formatArrayAttribute ( val: string | null, defaultValue = [] ): Array<any> {
+	static formatArrayAttribute ( val: string | null, defaultValue: Array<any> = [] ): Array<any> {
 
 		let arr: Array<any> = defaultValue;
 

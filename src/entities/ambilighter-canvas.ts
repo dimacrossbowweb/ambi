@@ -48,6 +48,15 @@ export class AmbilighterCanvas extends Ambilighter< HTMLCanvasElement > implemen
 
     }
 
+	/**
+	 * getters / setters
+	 */
+	get radius (): number {
+
+		return this?.options?.radius || 0;
+
+	}
+
     /**
      * Hooks
      */
