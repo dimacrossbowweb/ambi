@@ -18,109 +18,68 @@ export class AmbiBox extends HTMLElement {
 
 	update() {
 
-		const target: string = Formatted.formatStringAttribute( this.getAttribute( 'target' ), '' );
-		const lightTo: string = Formatted.formatStringAttribute( this.getAttribute( 'light-to' ), '' );
-		const radius: number = Formatted.formatNumberAttribute( this.getAttribute( 'radius' ), 0 );
-		const onupdate: string = Formatted.formatStringAttribute( this.getAttribute( 'onupdate' ), '' ).trim();
+		try {
 
-		const targetElement: ( HTMLElement | null ) = document.getElementById( target );
-		const lightToElement: ( HTMLElement | null ) = document.getElementById( lightTo ) || this.children[ 0 ];
+			const target: string = Formatted.formatStringAttribute( this.getAttribute( 'target' ), '' );
+			const lightTo: string = Formatted.formatStringAttribute( this.getAttribute( 'light-to' ), '' );
+			const radius: number = Formatted.formatNumberAttribute( this.getAttribute( 'radius' ), 0 );
+			const targetElement: ( HTMLElement | Node | null ) = document.getElementById( target ) || this.children[ 0 ];
+			const lightToElement: ( HTMLElement | Node | null ) = document.getElementById( lightTo ) || this.children[ 0 ];
 
-		const options: IOptions = {
+			const options: IOptions = {
 
-			'radius': radius,
+				'radius': radius,
 
-		};
+			};
 
-		if ( targetElement ) {
+			if ( targetElement instanceof HTMLElement ) {
 
-			this.ambilighter = Ambilight.produce( targetElement, options );
+				this.ambilighter = Ambilight.produce( targetElement, options );
 
-			if ( this.ambilighter?.onUpdate ) {
+				if ( this.ambilighter?.onUpdate ) {
 
-				this.ambilighter.onUpdate = ( data: any ): void => {
+					this.ambilighter.onUpdate = ( data: any ): void => {
 
-					const event: CustomEvent = new CustomEvent( 'onupdate', {
+						const event: CustomEvent = new CustomEvent( 'onupdate', {
 
-						detail: {
+							detail: {
 
-							data,
+								data,
 
-						},
+							},
 
-						bubbles: true,
-						composed: true,
+							bubbles: true,
+							composed: true,
 
-					} );
+						} );
 
-					const boxShadows: Array<string> = [ 	
+						if ( lightToElement instanceof HTMLElement ) {
 
-						`0 -${ radius / 2 }px ${ radius }px ${ new Color( data.frame.top.color ).toString() }`,
-						`${ radius / 2 }px 0 ${ radius }px ${ new Color( data.frame.right.color ).toString() }`,
-						`0 ${ radius / 2 }px ${ radius }px ${ new Color( data.frame.bottom.color ).toString() }`,
-						`-${ radius / 2 }px 0 ${ radius }px ${ new Color( data.frame.left.color ).toString() }`
+							const boxShadows: Array<string> = [ 	
 
-					];
+								`0 -${ radius / 2 }px ${ radius }px ${ new Color( data.frame.top.color ).toString() }`,
+								`${ radius / 2 }px 0 ${ radius }px ${ new Color( data.frame.right.color ).toString() }`,
+								`0 ${ radius / 2 }px ${ radius }px ${ new Color( data.frame.bottom.color ).toString() }`,
+								`-${ radius / 2 }px 0 ${ radius }px ${ new Color( data.frame.left.color ).toString() }`
 
-					lightToElement.style.boxShadow = boxShadows.join( ',' );
+							];
 
-					this.dispatchEvent( event );
+							lightToElement.style.boxShadow = boxShadows.join( ',' );
 
-					if ( onupdate && onupdate in window && typeof window[ onupdate ] === 'function' ) {
+							this.dispatchEvent( event );
 
-						window[ onupdate ].bind( this )( event );
+						}
 
-					} 
+					};
 
-				};
-
-			}
-
-		} else {
-
-			const el: ( HTMLElement | null ) = ( this.children[ 0 ] instanceof HTMLElement ? this.children[ 0 ] : null );
-
-			this.ambilighter = Ambilight.produce( el, options );
-				
-			if ( this.ambilighter?.onUpdate ) {
-
-				this.ambilighter.onUpdate = ( data: any ): void => {
-
-					const event: CustomEvent = new CustomEvent( 'onupdate', {
-
-						detail: {
-
-							data,
-
-						},
-
-						bubbles: true,
-						composed: true,
-
-					} );
-
-					const boxShadows: Array<string> = [ 	
-
-						`0 -${ radius / 2 }px ${ radius }px ${ new Color( data.frame.top.color ).toString() }`,
-						`${ radius / 2 }px 0 ${ radius }px ${ new Color( data.frame.right.color ).toString() }`,
-						`0 ${ radius / 2 }px ${ radius }px ${ new Color( data.frame.bottom.color ).toString() }`,
-						`-${ radius / 2 }px 0 ${ radius }px ${ new Color( data.frame.left.color ).toString() }`
-
-					];
-
-					el.style.boxShadow = boxShadows.join( ',' );
-
-					this.dispatchEvent( event );
-
-					if ( onupdate && onupdate in window && typeof window[ onupdate ] === 'function' ) {
-
-						window[ onupdate ].bind( this )( event );
-
-					} 
-
-				};
+				}
 
 			}
+
+		} catch ( e: unknown ) {
+
+			console.error( e );
+
 		}
 
 	}
@@ -166,13 +125,13 @@ export class AmbiBox extends HTMLElement {
 
 			'target',
 			'radius',
-			'onupdate',
+			'light-to',
 
 		];
 	
 	}
 
-	attributeChangedCallback( name: string, newValue: string ) {
+	attributeChangedCallback() {
 
 		if ( this.rendered ) {
 

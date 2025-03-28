@@ -19,8 +19,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
-	"strictNullChecks":false,
-	"strictPropertyInitialization": false,
 
   },
   "include": ["src"]

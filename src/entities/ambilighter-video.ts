@@ -19,52 +19,7 @@ export class AmbilighterVideo extends Ambilighter< HTMLVideoElement > implements
 
             }
 
-			el.addEventListener( 'timeupdate', (): void => {
-
-				this.updateCanvas( this.el );
-
-				const output: IOutput = {
-
-					frame: {
-
-						top: {
-							
-							color: averageColor( getImageData( this.canvas, Vector.top ) ),
-							radius: this.radius,
-
-						},
-
-						bottom: {
-							
-							color: averageColor( getImageData( this.canvas, Vector.bottom ) ),
-							radius: this.radius,
-
-						},
-
-						left: {
-							
-							color: averageColor( getImageData( this.canvas, Vector.left ) ),
-							radius: this.radius,
-
-						},
-
-						right: {
-							
-							color: averageColor( getImageData( this.canvas, Vector.right ) ),
-							radius: this.radius,
-
-						},
-
-					},
-
-					averageColor: averageColor( getImageData( this.canvas, Vector.bottomRight ) ),
-
-				};
-
-				// Fires onLoad hook
-				this.onUpdate( output );
-
-			} );
+			this.init();
 
         } catch ( e: unknown ) {
 
@@ -79,6 +34,67 @@ export class AmbilighterVideo extends Ambilighter< HTMLVideoElement > implements
         return el instanceof HTMLVideoElement;
 
     }
+
+	protected init(): void {
+
+		this.el.addEventListener( 'loadedmetadata', (): void => this.update() );
+		this.el.addEventListener( 'timeupdate', (): void => this.update() );
+
+	}
+
+	protected deinit(): void {
+
+		this.el.removeEventListener( 'loadedmetadata', (): void => this.update() );
+		this.el.removeEventListener( 'timeupdate', (): void => this.update() );
+
+	}
+
+	protected update (): void {
+
+		this.updateCanvas( this.el );
+
+		const output: IOutput = {
+
+			frame: {
+
+				top: {
+					
+					color: averageColor( getImageData( this.canvas, Vector.top ) ),
+					radius: this.radius,
+
+				},
+
+				bottom: {
+					
+					color: averageColor( getImageData( this.canvas, Vector.bottom ) ),
+					radius: this.radius,
+
+				},
+
+				left: {
+					
+					color: averageColor( getImageData( this.canvas, Vector.left ) ),
+					radius: this.radius,
+
+				},
+
+				right: {
+					
+					color: averageColor( getImageData( this.canvas, Vector.right ) ),
+					radius: this.radius,
+
+				},
+
+			},
+
+			averageColor: averageColor( getImageData( this.canvas, Vector.bottomRight ) ),
+
+		};
+
+		// Fires onLoad hook
+		this.onUpdate( output );
+
+	}
 
     /**
      * Updates when picture repainted

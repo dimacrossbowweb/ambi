@@ -1,15 +1,43 @@
 {
-  "name": "ambilighter",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview"
-  },
-  "devDependencies": {
-    "typescript": "~5.7.2",
-    "vite": "^6.2.0"
-  }
+	"name": "ambilighter",
+	"private": false,
+	"version": "1.0.2",
+	"type": "module",
+	"description": "Ambilight around the video, image or canvas HTML elements",
+	"descriptions": "Ambilight around the video, image or canvas HTML elements",
+	"main": "dist/ambilighter.umd.js",
+	"module": "dist/ambilighter.es.js",
+	"author": "dimacrossbow",
+	"license": "MIT",
+	"files": [
+		"dist",
+		"src"
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/dimacrossbowweb/ambi.git"
+	},
+	"keywords": [
+		"ambilight"
+	],
+	"exports": {
+		".": {
+			"import": "./dist/ambilighter.es.js",
+			"require": "./dist/ambilighter.js"
+		}
+	},
+	"scripts": {
+		"dev": "vite",
+		"build": "tsc && vite build",
+		"preview": "vite preview"
+	},
+	"devDependencies": {
+		"@vitejs/plugin-vue": "^5.2.3",
+		"typescript": "~5.7.2",
+		"vite": "^6.2.0",
+		"vite-plugin-css-injected-by-js": "^3.5.2"
+	},
+	"dependencies": {
+		"vue": "^3.5.13"
+	}
 }

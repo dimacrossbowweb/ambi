@@ -64,7 +64,6 @@
       
 	  <ambi-box
 	  
-		onupdate="onupdate"
 		id="ambi"
 		target="video"
 		light-to="video"
@@ -82,6 +81,7 @@
 			style="border-radius: 100%; object-fit: cover;"
 			autoplay
 			loop
+			muted
 
 		></video>
 
@@ -92,13 +92,6 @@
 		import { AmbiBox } from './src/components/ambi-box.ts';
 		import { Color } from './src/entities/color.ts';
 
-		function onupdate ( e ) {
-
-			console.log( e );
-
-			document.body.style.backgroundColor = e.detail.data.averageColor;
-
-		}
 
 		// document.getElementById( 'ambi' ).addEventListener( 'update', ( data ) => {
 
@@ -106,18 +99,6 @@
 		// 	console.log( data );
 
 		// } );
-
-	</script>
-
-	<script>
-
-		function onupdate ( e ) {
-
-			const color = `rgba(${ e.detail.data.averageColor.r }, ${e.detail.data.averageColor.g}, ${e.detail.data.averageColor.b}, ${e.detail.data.averageColor.a})`;
-
-			document.getElementById( 'avatar' ).style.backgroundColor = color;
-
-		}
 
 	</script>
   </body>
